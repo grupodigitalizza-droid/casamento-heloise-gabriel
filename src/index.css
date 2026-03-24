@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --cream: #FDF8F2;
+    --champagne: #EDD9B0;
+    --terracotta: #C4714A;
+    --sage: #7A9E7E;
+    --gold: #C9A84C;
+    --blush: #F2D5CC;
+    --charcoal: #2D2A26;
+    --muted: #9B8E83;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Lato', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-terracotta text-white font-body font-bold px-8 py-4 rounded-full text-base hover:bg-terracotta/90 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-terracotta text-terracotta font-body font-bold px-6 py-3 rounded-full text-sm hover:bg-terracotta hover:text-white active:scale-95 transition-all duration-200;
+  }
+
+  .card-illustrated {
+    @apply rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-white/60;
+  }
+
+  .gold-text {
+    @apply text-gold font-display;
+  }
+
+  .divider-ornament {
+    @apply flex items-center gap-3 text-gold/60;
+  }
+
+  .divider-ornament::before,
+  .divider-ornament::after {
+    content: '';
+    @apply flex-1 h-px bg-gold/30;
+  }
+}
+
+/* Scrollbar elegante */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--champagne);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Animação de confete */
+@keyframes confettiFall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.confetti-piece {
+  animation: confettiFall linear forwards;
+}
