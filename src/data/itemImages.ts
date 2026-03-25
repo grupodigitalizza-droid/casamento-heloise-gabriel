@@ -18,11 +18,18 @@ import item17 from '@/assets/items/item-17.jpg'
 import item18 from '@/assets/items/item-18.jpg'
 import item19 from '@/assets/items/item-19.jpg'
 import item20 from '@/assets/items/item-20.jpg'
+import item21 from '@/assets/items/item-21.jpg'
+import item22 from '@/assets/items/item-22.jpg'
 import item23 from '@/assets/items/item-23.jpg'
 import item24 from '@/assets/items/item-24.jpg'
 import item25 from '@/assets/items/item-25.jpg'
 import item26 from '@/assets/items/item-26.jpg'
+import item27 from '@/assets/items/item-27.jpg'
 import item28 from '@/assets/items/item-28.jpg'
+import item29 from '@/assets/items/item-29.jpg'
+import item30 from '@/assets/items/item-30.jpg'
+import item31 from '@/assets/items/item-31.jpg'
+import item32 from '@/assets/items/item-32.jpg'
 
 export const itemImages: Record<number, string> = {
   1: item01,
@@ -45,9 +52,16 @@ export const itemImages: Record<number, string> = {
   18: item18,
   19: item19,
   20: item20,
+  21: item21,
+  22: item22,
   23: item23,
   24: item24,
   25: item25,
   26: item26,
+  27: item27,
   28: item28,
+  29: item29,
+  30: item30,
+  31: item31,
+  32: item32,
 }
