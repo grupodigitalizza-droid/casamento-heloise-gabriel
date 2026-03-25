@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { GiftItem } from '@/data/giftItems'
 import { X, Heart, ShoppingBag, Minus, Plus } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
+import { itemImages } from '@/data/itemImages'
 
 interface Props {
   item: GiftItem
@@ -24,6 +25,8 @@ export default function GiftDetailModal({ item, onClose }: Props) {
     setTimeout(() => openCart(), 100)
   }
 
+  const illustration = itemImages[item.id]
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -40,18 +43,28 @@ export default function GiftDetailModal({ item, onClose }: Props) {
         className="bg-cream rounded-3xl max-w-md w-full overflow-hidden shadow-2xl max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Illustrated header */}
-        <div className={`aspect-[4/3] bg-gradient-to-br ${item.gradient} relative`}>
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, #00000030 1px, transparent 0)',
-              backgroundSize: '24px 24px',
-            }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center text-9xl select-none">
-            {item.emoji}
-          </div>
+        {/* Header */}
+        <div className={`aspect-[4/3] relative overflow-hidden ${!illustration ? `bg-gradient-to-br ${item.gradient}` : ''}`}>
+          {illustration ? (
+            <img
+              src={illustration}
+              alt={item.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            <>
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage: 'radial-gradient(circle at 1px 1px, #00000030 1px, transparent 0)',
+                  backgroundSize: '24px 24px',
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-9xl select-none">
+                {item.emoji}
+              </div>
+            </>
+          )}
 
           <button
             onClick={onClose}
