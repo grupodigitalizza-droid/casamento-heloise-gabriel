@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { GiftItem } from '@/data/giftItems'
 import { Plus, Heart } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
-import GiftIllustration from '@/components/illustrations/GiftIllustrations'
+import heroCoupleUrl from '@/assets/hero-couple.jpg'
 
 interface GiftCardProps {
   item: GiftItem
@@ -30,9 +30,33 @@ export default function GiftCard({ item, onClick, index }: GiftCardProps) {
       className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-white/80"
       onClick={onClick}
     >
-      {/* Illustrated scene */}
+      {/* Image area */}
       <div className="aspect-square relative overflow-hidden">
-        <GiftIllustration sceneId={item.scene} uid={`g${item.id}`} />
+        {/* Base photo */}
+        <img
+          src={heroCoupleUrl}
+          alt="Heloise, Gabriel e Mike"
+          className="absolute inset-0 w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-500"
+        />
+
+        {/* Colored overlay with item gradient */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-50 mix-blend-multiply`}
+        />
+
+        {/* Darker bottom fade for readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+
+        {/* Floating emoji */}
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 3 + (index % 3) * 0.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <span className="text-6xl md:text-7xl drop-shadow-lg select-none filter">
+            {item.emoji}
+          </span>
+        </motion.div>
 
         {/* Price badge */}
         <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1 shadow-md">
@@ -59,9 +83,9 @@ export default function GiftCard({ item, onClick, index }: GiftCardProps) {
           )}
         </motion.button>
 
-        {/* In-cart glow overlay */}
+        {/* In-cart ring */}
         {inCart && (
-          <div className="absolute inset-0 ring-2 ring-inset ring-terracotta/30 rounded-t-2xl pointer-events-none" />
+          <div className="absolute inset-0 ring-2 ring-inset ring-terracotta/40 rounded-t-2xl pointer-events-none" />
         )}
       </div>
 
