@@ -1,24 +1,15 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { giftItems, categories, GiftItem } from '@/data/giftItems'
+import { giftItems, GiftItem } from '@/data/giftItems'
 import GiftCard from '@/components/GiftCard'
 import GiftDetailModal from '@/components/GiftDetailModal'
-import CategoryFilter from '@/components/CategoryFilter'
 import CartDrawer from '@/components/CartDrawer'
 import CartButton from '@/components/CartButton'
 import { ArrowLeft, Heart } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function GiftList() {
-  const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedItem, setSelectedItem] = useState<GiftItem | null>(null)
-
-  const filteredItems = useMemo(() => {
-    if (selectedCategory === 'all') return giftItems
-    return giftItems.filter((item) => item.category === selectedCategory)
-  }, [selectedCategory])
-
-  const currentCategory = categories.find((c) => c.id === selectedCategory)
 
   return (
     <div className="min-h-screen bg-cream">
@@ -50,39 +41,14 @@ export default function GiftList() {
         </div>
       </header>
 
-      {/* Category filter */}
-      <section className="container max-w-6xl mx-auto px-4 pt-8 pb-4">
-        <CategoryFilter selected={selectedCategory} onSelect={setSelectedCategory} />
-      </section>
-
-      {/* Section title */}
-      <AnimatePresence mode="wait">
-        {selectedCategory !== 'all' && currentCategory && (
-          <motion.div
-            key={selectedCategory}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="container max-w-6xl mx-auto px-4 pb-2 text-center"
-          >
-            <h2 className="font-display text-2xl font-bold text-charcoal">
-              {currentCategory.label}
-            </h2>
-            <p className="text-sm text-muted font-body mt-1">
-              {filteredItems.length} {filteredItems.length === 1 ? 'presente' : 'presentes'}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Gift grid */}
-      <section className="container max-w-6xl mx-auto px-4 pb-32">
+      <section className="container max-w-6xl mx-auto px-4 py-8 pb-32">
         <motion.div
           layout
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5"
         >
           <AnimatePresence>
-            {filteredItems.map((item, index) => (
+            {giftItems.map((item, index) => (
               <GiftCard
                 key={item.id}
                 item={item}
